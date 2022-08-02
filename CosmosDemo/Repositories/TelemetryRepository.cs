@@ -19,11 +19,11 @@ public class TelemetryRepository
         _client = new CosmosClient(connString);
     }
 
-    internal async Task Create(Telemetry model)
+    internal async Task<Telemetry> Create(Telemetry model)
     {
         var container = await GetContainer();
-        var result = await container.CreateItemAsync(model, new PartitionKey(model.MonitorId), ItemRequestOptions);
-
+        var result = await container.CreateItemAsync(model, new PartitionKey(model.MonitorId));
+        return result.Value;
     }
 
     internal async Task<List<Telemetry>> GetAll()

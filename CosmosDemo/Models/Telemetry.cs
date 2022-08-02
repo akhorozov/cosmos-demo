@@ -13,3 +13,7 @@ public class Telemetry
     public string Notes { get; set; } = "";
     //public MonitorStatus MonitorStatus { get; set; }
 }
+public enum MonitorStatus{
+    Active,
+    Fail
+}
