@@ -1,5 +1,4 @@
 namespace CosmosDemo;
-
 public class Reading
 {
     public DateTime ReadingTime { get; set; } = DateTime.UtcNow;

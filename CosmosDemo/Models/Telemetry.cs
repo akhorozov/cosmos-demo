@@ -1,5 +1,6 @@
-using System.Text.Json.Serialization;
 namespace CosmosDemo;
+using System.Text.Json.Serialization;
+
 public class Telemetry
 {
     [JsonPropertyName("id")]
@@ -11,9 +12,5 @@ public class Telemetry
         set;
     }
     public string Notes { get; set; } = "";
-    //public MonitorStatus MonitorStatus { get; set; }
-}
-public enum MonitorStatus{
-    Active,
-    Fail
+    public MonitorStatus MonitorStatus { get; set; }
 }

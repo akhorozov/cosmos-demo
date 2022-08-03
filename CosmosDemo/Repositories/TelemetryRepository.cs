@@ -19,23 +19,66 @@ public class TelemetryRepository
         _client = new CosmosClient(connString);
     }
 
-    internal async Task<Telemetry> Create(Telemetry model)
+    internal async Task<Telemetry> Create(Telemetry item)
     {
         var container = await GetContainer();
-        var result = await container.CreateItemAsync(model, new PartitionKey(model.MonitorId));
+        var result = await container.CreateItemAsync(item, new PartitionKey(item.MonitorId));
         return result.Value;
     }
 
-    internal async Task<List<Telemetry>> GetAll()
+    internal async Task<List<Telemetry>> GetAll(string monitorId)
     {
-        throw new NotImplementedException();
+        var container = await GetContainer();
+        var sql = @"SELECT VALUE c
+              FROM c
+              WHERE c.MonitorId = @monitorId";
+
+        var query = new QueryDefinition(sql)
+            .WithParameter("@monitorId", monitorId);
+
+        var results = new List<Telemetry>();
+
+        var iterator = container
+            .GetItemQueryIterator<Telemetry>(query);
+
+        await foreach (Telemetry result in iterator)
+        {
+            results.Add(result);
+        }
+
+        return results;
+
     }
 
-    internal async Task<Telemetry> GetById()
+    internal async Task<Telemetry?> GetById(string id)
     {
-        throw new NotImplementedException();
+        var sql = $"SELECT * FROM c WHERE c.id = @id";
+        var query = new QueryDefinition(sql).WithParameter("@id", id);
+
+        var container = await GetContainer();
+        var iterator = container.GetItemQueryIterator<Telemetry>(query);
+
+        var enumerator = iterator.GetAsyncEnumerator();
+        if (await enumerator.MoveNextAsync())
+        {
+            return enumerator.Current;
+        }
+        return null;
     }
 
+    internal async Task<Telemetry> Update(Telemetry item)
+    {
+        var container = await GetContainer();
+        var result = await container.ReplaceItemAsync(item, item.Id);
+        return result.Value;
+    }
+
+    internal async Task<Telemetry> Delete(Telemetry item)
+    {
+        var container = await GetContainer();
+        var result = await container.DeleteItemAsync<Telemetry>(item.Id, new PartitionKey(item.MonitorId));
+        return result.Value;
+    }
     async Task InitializeDatabaseAsync()
     {
         if (_enviroment.IsDevelopment())
