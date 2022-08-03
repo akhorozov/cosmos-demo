@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "47147719-d6bb-4336-8ea9-4b7cf3a855e0",
+		"name": "Cosmos Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5643421"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"monitorId\": \"zelle\",\r\n    \"monitorStatus\": 0,\r\n    \"readings\": [\r\n        {\r\n            \"windSpeed\": 1.2,\r\n            \"temperature\": 98,\r\n            \"altitude\": 1202\r\n        },\r\n        {\r\n            \"windSpeed\": 1,\r\n            \"temperature\": 91,\r\n            \"altitude\": 1105\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/meter/telemetry",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"meter",
+						"telemetry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/meter/telemetry/9f77d464-f9c9-414e-b720-a627f26e45aa",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"meter",
+						"telemetry",
+						"9f77d464-f9c9-414e-b720-a627f26e45aa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/meter/monitor/zelle",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"meter",
+						"monitor",
+						"zelle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"d628bfbf-0391-48c4-9a18-d45b59e6a853\",\r\n    \"monitorId\": \"zelle\",\r\n    \"readings\": [\r\n        {\r\n            \"readingTime\": \"2022-08-03T02:37:33.635242Z\",\r\n            \"windSpeed\": 2.2,\r\n            \"temperature\": 98,\r\n            \"altitude\": 1202\r\n        },\r\n        {\r\n            \"readingTime\": \"2022-08-03T02:37:33.6365418Z\",\r\n            \"windSpeed\": 1,\r\n            \"temperature\": 91,\r\n            \"altitude\": 1105\r\n        }\r\n    ],\r\n    \"notes\": \"\",\r\n    \"monitorStatus\": 1\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/meter/telemetry",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"meter",
+						"telemetry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/meter/telemetry/9f77d464-f9c9-414e-b720-a627f26e45aa",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"meter",
+						"telemetry",
+						"9f77d464-f9c9-414e-b720-a627f26e45aa"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://localhost:7106",
+			"type": "string"
+		}
+	]
+}
