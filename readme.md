@@ -8,10 +8,12 @@ Published in: [CODE Magazine: 2022 - May/June](https://www.codemag.com/Article/2
   
 ## Packages
 * [Package - Azure.Cosmos](https://www.nuget.org/packages/Azure.Cosmos)
+  
 `
 dotnet add package Azure.Cosmos --version 4.0.0-preview3
 `
 * [Package - Microsoft.EntityFrameworkCore.Cosmos](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos)
+
 `
 dotnet add package Microsoft.EntityFrameworkCore.Cosmos --version 6.0.7
 `  
